@@ -51,6 +51,116 @@
         "showReuseMessage": false,
         "clear": true
       }
+    },
+    {
+      "label": "Git Config",
+      "type": "shell",
+      "command": "git config --list --show-origin",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Check GH CLI",
+      "type": "shell",
+      "command": "which gh && gh --version",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Enable GPG Wrapper",
+      "type": "shell",
+      "command": "chmod +x ./scripts/gh-gpgsign.sh",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Test Commit",
+      "type": "shell",
+      "command": "git commit --allow-empty -m 'test signing'",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "GH GPG Help",
+      "type": "shell",
+      "command": "gh gpg-key --help",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Show Codespaces Signer",
+      "type": "shell",
+      "command": "sudo cat /.codespaces/bin/gh-gpgsign || echo 'not found'",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Dump GPG Keys",
+      "type": "shell",
+      "command": "gpg --list-secret-keys --with-colons || echo '<no gpg>'",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Make GPG Script Executable",
+      "type": "shell",
+      "command": "chmod +x scripts/gh-gpgsign.sh && git update-index --chmod=+x scripts/gh-gpgsign.sh",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Show GPG Sign Log",
+      "type": "shell",
+      "command": "cat /tmp/git-gpgsign.log || echo '[no log]'",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Git Commit & Push",
+      "type": "shell",
+      "command": "git add -A && git -c commit.gpgsign=false commit -m \"configure gh-gpgsign and update scripts\" && git push origin HEAD",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
     }
   ]
 }
