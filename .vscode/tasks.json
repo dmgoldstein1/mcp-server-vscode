@@ -185,6 +185,28 @@
         "clear": true
       }
     },
+    {
+      "label": "Test Push",
+      "type": "shell",
+      "command": "cd /workspaces/mcp-server-vscode && gh auth status && echo '---' && git push -u origin dmgoldstein1_patch1 2>&1",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "List User Repos",
+      "type": "shell",
+      "command": "gh api user/repos --paginate -q '.[] | .name' | head -20",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
 
     {
       "label": "Git Commit & Push",
