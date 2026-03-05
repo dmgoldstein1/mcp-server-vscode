@@ -74,7 +74,9 @@
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
     "package": "vsce package",
-    "start:mcp": "node ./out/mcp/standalone-server.js"
+    "start:mcp": "nsolid ./out/mcp/standalone-server.js",
+    "start:mcp:node": "node ./out/mcp/standalone-server.js",
+    "start:nsolid": "./start-nsolid.sh"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
@@ -86,10 +88,26 @@
     "@vscode/test-electron": "^2.4.1",
     "eslint": "^8.57.1",
     "glob": "^11.0.3",
-    "mocha": "^11.7.1",
+    "mocha": "^11.3.0",
     "typescript": "^5.6.3"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.13.2"
+    "@modelcontextprotocol/sdk": "^1.27.1"
+  },
+  "overrides": {
+    "diff": "^8.0.3",
+    "serialize-javascript": "^7.0.4"
+  },
+  "nsolid": {
+    "appname": "mcp-server-vscode",
+    "tags": "vscode,mcp,ai-assistant",
+    "tracing": {
+      "enabled": true
+    },
+    "otlp": "otlp",
+    "otlpConfig": {
+      "url": "http://localhost:4318/v1/traces",
+      "protocol": "http"
+    }
   }
 }
