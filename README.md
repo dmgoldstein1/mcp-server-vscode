@@ -217,6 +217,147 @@ AI uses: debug_evaluateExpression({ expression: "users.length > 0 && isActive" }
 → Evaluates the expression in current debug scope
 ```
 
+## N|Solid Runtime Integration
+
+This project supports running on the **N|Solid runtime** for enhanced observability and monitoring. N|Solid is an enhanced, hardened fork of Node.js that provides zero-code instrumentation and built-in telemetry.
+
+### What is N|Solid?
+
+N|Solid provides:
+
+- **Zero-code instrumentation** - No changes to application code required
+- **Built-in observability** - CPU profiling, heap snapshots, event loop metrics
+- **OpenTelemetry integration** - Standards-based telemetry export
+- **Security monitoring** - Vulnerability detection in dependencies
+- **Drop-in replacement** - The `nsolid` command works exactly like `node`
+
+### Installing N|Solid
+
+#### Linux
+
+```bash
+# For Node.js 24.x (Krypton LTS)
+curl -fsSL https://deb.nodesource.com/setup_24.x | sudo -E bash -
+sudo apt-get install nsolid -y
+
+# For Node.js 22.x (Jod LTS)
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt-get install nsolid -y
+```
+
+#### macOS
+
+```bash
+# Using Homebrew
+brew install nsolid
+```
+
+#### Docker
+
+```bash
+# Pull official N|Solid image
+docker pull nodesource/nsolid:krypton-latest  # Node.js 24.x
+docker pull nodesource/nsolid:jod-latest      # Node.js 22.x
+```
+
+### Running with N|Solid
+
+#### Quick Start
+
+Use the included start script for easy setup:
+
+```bash
+# Run with automatic N|Solid detection and configuration
+npm run start:nsolid
+```
+
+The script will:
+- Check if N|Solid is installed
+- Display version information
+- Auto-detect OTLP collector if available
+- Start the server with optimal settings
+
+#### Basic Usage
+
+Replace `node` with `nsolid`:
+
+```bash
+# Before
+npm run start:mcp:node
+
+# After
+npm run start:mcp
+```
+
+#### With Environment Variables
+
+```bash
+# Set application name and enable tracing
+export NSOLID_APPNAME="mcp-server-vscode"
+export NSOLID_TRACING_ENABLED=1
+export NSOLID_OTLP=otlp
+export NSOLID_OTLP_CONFIG='{"url":"http://localhost:4318/v1/traces","protocol":"http"}'
+
+# Run with N|Solid
+npm run start:mcp
+```
+
+### Docker Deployment with N|Solid
+
+The included `Dockerfile` uses the N|Solid runtime by default:
+
+```bash
+# Build the Docker image
+docker build -t mcp-server-vscode .
+
+# Run the container
+docker run -p 8991:8991 mcp-server-vscode
+```
+
+### Monitoring Stack
+
+The included `docker-compose.yml` provides a complete observability stack:
+
+```bash
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f mcp-server-vscode
+
+# Stop services
+docker-compose down
+```
+
+**Services included:**
+
+| Service | Port | Purpose |
+|---------|------|---------|
+| mcp-server-vscode | 8991 | MCP Server |
+| otel-collector | 4317, 4318 | Telemetry collection |
+| clickhouse | 8123, 9000 | Metrics storage |
+| nsolid-api | 3001 | Backend API |
+| nsolid-ui | 3002 | Web dashboard |
+
+### Verification
+
+After starting with N|Solid:
+
+1. Check N|Solid version: `nsolid -vv`
+2. Open N|Solid UI: http://localhost:3002
+3. Verify application appears in the dashboard
+4. Check metrics and traces are flowing
+
+### Configuration
+
+N|Solid can be configured via:
+
+1. **package.json** - Already configured in this project
+2. **Environment variables** - Override package.json settings
+3. **JavaScript API** - For programmatic control
+
+See the `nsolid` section in `package.json` for default configuration.
+
 ## Development
 
 ### Building from Source
