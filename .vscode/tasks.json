@@ -152,6 +152,30 @@
       }
     },
     {
+      "label": "Ensure Fork & Push",
+      "type": "shell",
+      "command": "gh repo fork malvex/mcp-server-vscode --clone=false --remote=false --org=dmgoldstein1 || true && git push -u origin HEAD",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "GitHub Login",
+      "type": "shell",
+      "command": "env -u GITHUB_TOKEN gh auth login",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared",
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+
+    {
       "label": "Git Commit & Push",
       "type": "shell",
       "command": "git add -A && git -c commit.gpgsign=false commit -m \"configure gh-gpgsign and update scripts\" && git push origin HEAD",
