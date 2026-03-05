@@ -344,7 +344,7 @@ docker-compose down
 After starting with N|Solid:
 
 1. Check N|Solid version: `nsolid -vv`
-2. Open N|Solid UI: http://localhost:3002
+2. Open N|Solid UI: <http://localhost:3002>
 3. Verify application appears in the dashboard
 4. Check metrics and traces are flowing
 

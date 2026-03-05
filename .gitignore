@@ -9,5 +9,5 @@ test-results/
 coverage/
 
 
-#Ignore vscode AI rules
+# Ignore vscode AI rules
 .github/instructions/codacy.instructions.md

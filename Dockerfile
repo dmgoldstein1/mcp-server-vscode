@@ -33,7 +33,7 @@ ENV NSOLID_OTLP_CONFIG={"url":"http://otel-collector:4318/v1/traces","protocol":
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:8991/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1))"
+  CMD nsolid -e "require('http').get('http://localhost:8991/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1))"
 
 # Expose the default MCP server port
 EXPOSE 8991

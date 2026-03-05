@@ -15,6 +15,9 @@ processors:
     send_batch_size: 1024
 
 exporters:
+  # NOTE: The `clickhouse` exporter is provided by the OpenTelemetry Collector
+  # Contrib distribution (e.g., `otel/opentelemetry-collector-contrib`), not
+  # the core collector. Ensure you are using the contrib image/binary.
   clickhouse:
     endpoint: clickhouse://clickhouse:9000
     database: nsolid

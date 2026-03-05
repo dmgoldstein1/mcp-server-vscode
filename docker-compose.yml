@@ -14,7 +14,7 @@ services:
       - NSOLID_TAGS=docker,production
       - NSOLID_TRACING_ENABLED=1
       - NSOLID_OTLP=otlp
-      - NSOLID_OTLP_CONFIG={"url":"http://otel-collector:4318/v1/traces","protocol":"http"}
+      - 'NSOLID_OTLP_CONFIG={"url":"http://otel-collector:4318/v1/traces","protocol":"http"}'
       - VSCODE_BRIDGE_PORT=8991
     ports:
       - "8991:8991"
