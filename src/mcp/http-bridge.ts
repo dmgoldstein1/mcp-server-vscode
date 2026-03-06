@@ -54,10 +54,12 @@ export class HTTPBridge {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ result }));
           } catch (error) {
-            res.writeHead(500);
+            // Log detailed error information on the server, but do not expose it to the client.
+            console.error('Error while handling /tool request:', error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
             res.end(
               JSON.stringify({
-                error: error instanceof Error ? error.message : String(error),
+                error: 'Internal server error',
               })
             );
           }
